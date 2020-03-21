@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>xFilewriter</PackageId>
+    <Version>1.0.0</Version>
+    <Company>Xeroxcore</Company>
+    <Title>xFilewriter</Title>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageDescription>A Filewriter component simplefying writing text to files or reading text files</PackageDescription>
+    <Summary>Easy to use filewriter allowing for easy of use and deployment</Summary>
+    <PackageTags>File-writer</PackageTags>
+    <Authors>Nasar Eddaoui</Authors>
+    <Copyright>Copyright © Xeroxcore 2020</Copyright>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Xeroxcore/xFilewriter</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
