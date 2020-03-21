@@ -9,5 +9,8 @@ namespace xFilewriter
 
         public static bool FilePathExists(string filePath)
             => File.Exists(filePath);
+
+        public static bool StringIsNullOrEmpty(string text)
+            => string.IsNullOrEmpty(text);
     }
 }

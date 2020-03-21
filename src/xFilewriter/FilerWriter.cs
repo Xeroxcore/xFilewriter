@@ -7,12 +7,15 @@ namespace xFilewriter
 {
     public class FileWriter : IFileWriter
     {
-        public void EnsureThatFilePathExists(string direcrotyPath, string fileName)
+        public void EnsureThatFilePathExists(string directoryPath, string fileName)
         {
-            if (!Validation.DirecortyPathExists(direcrotyPath))
-                CreateDirectoryPath(direcrotyPath);
-            if (!Validation.FilePathExists($"{direcrotyPath}/{fileName}"))
-                CreateFile($"{direcrotyPath}/{fileName}");
+            if (Validation.StringIsNullOrEmpty(directoryPath) || Validation.StringIsNullOrEmpty(fileName))
+                throw new Exception("Error: directory Path or filename is null or empty");
+
+            if (!Validation.DirecortyPathExists(directoryPath))
+                CreateDirectoryPath(directoryPath);
+            if (!Validation.FilePathExists($"{directoryPath}/{fileName}"))
+                CreateFile($"{directoryPath}/{fileName}");
         }
 
         public void DeleteFile(string filePath)
@@ -48,16 +51,28 @@ namespace xFilewriter
             fs.Write(byteArray, 0, byteArray.Length);
         }
 
+        public bool IsSupportedFileModes(FileMode fileMode)
+            => FileMode.Open == fileMode || FileMode.Open == fileMode;
+
         public void AppendTextToFile(string text, string filePath, FileMode fileMode)
         {
             try
             {
+                if (!Validation.FilePathExists(filePath))
+                    throw new Exception("Error: The Given FilePath does not exist");
+
+                if (!IsSupportedFileModes(fileMode))
+                    throw new Exception("You have entered an unsupported file mode please use append or open");
+
                 using (var fs = new FileStream(filePath, fileMode, FileAccess.Write))
                 {
                     if (fileMode == FileMode.Append)
                         text += Environment.NewLine;
                     AddTextToFile(fs, text);
                 }
+
+
+
             }
             catch (Exception)
             {
@@ -69,6 +84,9 @@ namespace xFilewriter
         {
             try
             {
+                if (!Validation.FilePathExists(filePath))
+                    throw new Exception("Error: The Given FilePath is does not exist");
+
                 using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 {
                     using (var reader = new StreamReader(fs))
