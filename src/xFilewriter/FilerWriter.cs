@@ -52,7 +52,7 @@ namespace xFilewriter
         }
 
         public bool IsSupportedFileModes(FileMode fileMode)
-            => FileMode.Open == fileMode || FileMode.Open == fileMode;
+            => FileMode.Open == fileMode || FileMode.Append == fileMode || FileMode.Truncate == fileMode;
 
         public void AppendTextToFile(string text, string filePath, FileMode fileMode)
         {
@@ -62,7 +62,7 @@ namespace xFilewriter
                     throw new Exception("Error: The Given FilePath does not exist");
 
                 if (!IsSupportedFileModes(fileMode))
-                    throw new Exception("You have entered an unsupported file mode please use append or open");
+                    throw new Exception("You have entered an unsupported file mode please use Append, Open or Truncate");
 
                 using (var fs = new FileStream(filePath, fileMode, FileAccess.Write))
                 {

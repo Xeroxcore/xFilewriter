@@ -97,7 +97,7 @@ namespace xFilewriter.test
             catch (Exception error)
             {
                 FileWriter.DeleteFile(filepath);
-                Assert.AreEqual("You have entered an unsupported file mode please use append or open", error.Message);
+                Assert.AreEqual("You have entered an unsupported file mode please use Append, Open or Truncate", error.Message);
 
             }
         }
